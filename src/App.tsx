@@ -1,15 +1,26 @@
-import React from 'react';
-import'./App.css';
-import {Players} from './components/Players';
+import React from "react";
+import "./App.css";
+import playersArray from "./components/Players";
 
-import './App.css';
 
-export const App:React.FC = () => {
+export const App: React.FC = () => {
+
+  const playersArrayList = playersArray.map((player:any, idx:any) => (
+    <tr key={player.id}>
+     <td >{player.username}</td> <td>{player.points}</td>
+     </tr>
+     
+  ));
+
   return (
     <div className="App">
-      <Players/>
+      <table>
+        <tr>
+          <th>Username</th> <th>Points</th>
+        </tr>
+        {playersArrayList}
+      </table>
     </div>
   );
-}
-
+};
 
