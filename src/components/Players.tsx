@@ -7,7 +7,7 @@ export const playersArray = [
   {
   Id:2,
       username: "Marek",
-      points: 99,
+      points: 167,
     },
   {
   Id:3,    
@@ -47,7 +47,7 @@ export const playersArray = [
   {
   Id:10,
       username: "Dorota",
-      points: 70,
+      points: 170,
     },
 ];
 

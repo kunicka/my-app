@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./App.css";
 import playersArray from "./components/Players";
 
@@ -6,14 +6,18 @@ import playersArray from "./components/Players";
 export const App: React.FC = () => {
 
   const playersArrayList = playersArray.map((player:any, idx:number) => (
-    <tr key={player.id}>
-     <td >{player.username}</td> <td>{player.points}</td>
+    <tr 
+    key={player.id} 
+    style={{
+      backgroundColor:player.points>100?'red':'white',
+      color:player.points>100?'white':'black'}}
+      >
+     <td>{player.username}</td> <td>{player.points}</td>
      </tr>
-     
-  ));
+    ));
 
+  
 
-  // const sumOfPoints = playersArrayList.reduce(function(a,b){return{points: a.points + b.points}})
 
   const sumOfPoints:number = playersArray.reduce((previousScore, currentScore, index)=>previousScore+currentScore.points, 0);
 
