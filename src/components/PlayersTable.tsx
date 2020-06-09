@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import playersArray from "./Players.json";
 
 export interface ColorProps {
@@ -17,7 +17,29 @@ export interface newPlayerProps {
   points: number;
 }
 
-export const PlayersTable: React.FC<ColorProps> = (props, children) => {
+export const PlayersTable:React.FC<ColorProps>  = (props, children: any) => {
+  const [newPlayerName, setNewPlayerName] = useState<string>("");
+  const [newPlayerId, setNewPlayerId] = useState<number>(11);
+  const [newPlayer, setNewPlayer] = useState<Player>({
+    id: newPlayerId,
+    username: newPlayerName,
+    points: 0,
+  });
+  const [newArray, setNewArray]=useState([]);
+
+  const addPlayer: () => void = () => {
+    const points = Math.floor(Math.random() * 200) + 1;
+    setNewPlayer({
+      id: newPlayer.id,
+      username: newPlayer.username,
+      points: points,
+    });
+    setNewPlayerId((prevNewPlayerId) => prevNewPlayerId + 1);
+    const functionArray = [...newArray, newPlayer];
+    
+    }
+  };
+
   const sumOfPoints: number = playersArray.reduce(
     (previousScore, currentScore, index) => previousScore + currentScore.points,
     0
@@ -28,12 +50,21 @@ export const PlayersTable: React.FC<ColorProps> = (props, children) => {
       (previousScore + currentScore.points) / playersArray.length,
     0
   );
-
-  
-
   const shorterAverage = pointsAverage.toFixed(2);
+
+  const nameRef = useRef<HTMLInputElement>(null);
+
   return (
     <div>
+      <>
+        <input
+          ref={nameRef}
+          placeholder="Enter the name if the player"
+          onChange={(e) => setNewPlayerName(e.target.value)}
+          type="text"
+        />
+        <button onClick={addPlayer}>add a new Player and see the score</button>
+      </>
       <table>
         <tr>
           <th>Username</th> <th>Points</th>
@@ -48,17 +79,15 @@ export const PlayersTable: React.FC<ColorProps> = (props, children) => {
                   : { color: "black", backgroundColor: "white" }
               }
             >
-              <td>{player.username}</td> <td>{player.points}</td>
+              {/* <td>{player.username}</td> <td>{player.points}</td> 
+              mapping newArray method!*/}
             </tr>
           ))}
 
-
-<tr>
-    <td>{props.newPlayer.username}</td>
-    <td>{props.newPlayer.points}</td>
-</tr>
-
-
+          <tr>
+            <td>{newPlayer.username}</td>
+            <td>{newPlayer.points}</td>
+          </tr>
         </tbody>
         <tfoot>
           <tr>
