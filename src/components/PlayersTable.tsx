@@ -1,9 +1,14 @@
 import React from 'react'
-import playersArray from "./Players";
-import Player from "./Players"
+import playersArray from "./Players.json";
 
 export interface ColorProps{
     color:string;
+}
+
+export interface Player{
+id:number,
+username:string,
+points:number
 }
 
 export const PlayersTable:React.FC<ColorProps> = (props) => {
@@ -19,7 +24,7 @@ export const PlayersTable:React.FC<ColorProps> = (props) => {
         <tr>
           <th>Username</th> <th>Points</th>
         </tr>
-        {playersArray.map((player:any, index:number) => ( <tr key={player.id} 
+        {playersArray.map((player:Player, index:number) => ( <tr key={player.id} 
         style ={player.points>100? 
             {color:'white', backgroundColor:props.color}:
             {color:'black', backgroundColor:"white"}}>

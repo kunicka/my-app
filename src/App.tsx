@@ -2,9 +2,6 @@ import React, {useState} from "react";
 import "./App.css";
 import {PlayersTable} from "./components/PlayersTable"
 
-
-
-
 export const App: React.FC = () => {
 
   const [highlightcolor, setHightlightcolor] = useState("red")
