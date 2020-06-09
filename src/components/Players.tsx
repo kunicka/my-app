@@ -1,54 +1,60 @@
+export interface Player {
+  id: number;
+  username: string;
+  points: number;
+}
+
 export const playersArray = [
-    {
-  Id:1,
-      username: "Agnieszka",
-      points: 120,
-    },
   {
-  Id:2,
-      username: "Marek",
-      points: 167,
-    },
+    id: 1,
+    username: "Agnieszka",
+    points: 120,
+  },
   {
-  Id:3,    
-  username: "Kasia",
-      points: 45,
-    },
+    id: 2,
+    username: "Marek",
+    points: 167,
+  },
   {
-  Id:4,
-      username: "Ania",
-      points: 98,
-    },
+    id: 3,
+    username: "Kasia",
+    points: 45,
+  },
   {
-  Id:5,
-      username: "Agata",
-      points: 76,
-    },
+    id: 4,
+    username: "Ania",
+    points: 98,
+  },
   {
-  Id:6,
-      username: "Julia",
-      points: 60,
-    },
+    id: 5,
+    username: "Agata",
+    points: 76,
+  },
   {
-  Id:7,
-      username: "Maja",
-      points: 28,
-    },
+    id: 6,
+    username: "Julia",
+    points: 60,
+  },
   {
-  Id:8,    
-  username: "Marta",
-      points: 72,
-    },
+    id: 7,
+    username: "Maja",
+    points: 28,
+  },
   {
-  Id:9,
-      username: "Stanisław",
-      points: 64,
-    },
+    id: 8,
+    username: "Marta",
+    points: 72,
+  },
   {
-  Id:10,
-      username: "Dorota",
-      points: 170,
-    },
+    id: 9,
+    username: "Stanisław",
+    points: 64,
+  },
+  {
+    id: 10,
+    username: "Dorota",
+    points: 170,
+  },
 ];
 
-export default playersArray
+export default playersArray;
