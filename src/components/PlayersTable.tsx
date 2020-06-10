@@ -1,4 +1,4 @@
-import React, {useRef, useState, PropsWithChildren} from "react";
+import React, {useState, PropsWithChildren} from "react";
 import playersArray from "./Players.json";
 
 export interface Color {
@@ -23,6 +23,7 @@ export const PlayersTable:(
     => any = (props, children: any) => {
 
 const [playersList, setPlayersList] = useState<Array<Player>>(playersArray);
+const [name, setName] = useState("");
 
   let id = 0;
 
@@ -30,18 +31,38 @@ const [playersList, setPlayersList] = useState<Array<Player>>(playersArray);
     const points = Math.floor(Math.random() * 200) + 1;
     id++;
 
+    
+
     const Player = {
         id:id,
-        username: nameRef.current?.value,
+        username: name,
         points: points
     }
 
-    const newArray = [
-        ...playersList,
-        Player
-      ];
+    
 
-      type newArray = Player[];
+      setPlayersList([...playersList, Player])
+
+      // const newArray = [
+    //     ...playersList,
+    //     Player
+    //   ];
+
+    //   type newArray = Player[];
+
+    //   function Example() {
+    //     const [theArray, setTheArray] = useState([]);
+    //     const addEntryClick = () => {
+    //         setTheArray([...theArray, `Entry ${theArray.length}`]);
+    //     };
+    //     return [
+    //         <input type="button" onClick={addEntryClick} value="Add" />,
+    //         <div>{theArray.map(entry =>
+    //           <div>{entry}</div>
+    //         )}
+    //         </div>
+    //     ];
+    // }
 
     //   setPlayersList(newArray);
     // druga opcja, ale też wyskakuje błąd:     setPlayersList([...playersList, Player]);
@@ -62,16 +83,13 @@ const [playersList, setPlayersList] = useState<Array<Player>>(playersArray);
   );
   const shorterAverage = pointsAverage.toFixed(2);
 
-  const nameRef = useRef<HTMLInputElement>(null);
-
   return (
     <div>
       <>
         <input
-          ref={nameRef}
           placeholder="Enter the name if the player"
           type="text"
-          id="name-id"
+          onChange={(e)=>setName(e.target.value)}
         />
         <button onClick={addPlayer}>add a new Player and see the score</button>
       </>
