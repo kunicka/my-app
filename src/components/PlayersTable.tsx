@@ -22,6 +22,9 @@ export const PlayersTable:(props: PropsWithChildren<Color>, children: any) => an
   let id = 10;
 
  let newArray: { id: number; username: string | undefined; points: number; }[] =[];
+ const jsonArray: 
+ { id: number; username: string | undefined; points: number; }[] =[...playersArray];;
+ 
 
   const addPlayer = () => {
     const points = Math.floor(Math.random() * 200) + 1;
@@ -68,7 +71,7 @@ export const PlayersTable:(props: PropsWithChildren<Color>, children: any) => an
           <th>Username</th> <th>Points</th>
         </tr>
         <tbody>
-          {playersArray.map((player: Player, index: number) => (
+          {jsonArray.map((player) => (
             <tr
               key={player.id}
               style={
@@ -78,7 +81,7 @@ export const PlayersTable:(props: PropsWithChildren<Color>, children: any) => an
               }
             >
               <td>{player.username}</td> <td>{player.points}</td>
-              
+              <td><button onClick={(e)=>{newArray.splice(player.id-1, 1)}}>Delete</button></td>
             </tr>
           ))}
           {newArray.map((player) => (
@@ -91,6 +94,7 @@ export const PlayersTable:(props: PropsWithChildren<Color>, children: any) => an
               }
             >
               <td>{player.username}</td> <td>{player.points}</td>
+              <td><button onClick={(e)=>{newArray.splice(player.id-11, 1)}}>Delete</button></td>
             </tr>
           ))}
         </tbody>
