@@ -24,7 +24,7 @@ export const App: React.FC = () => {
       </button>
       
 
-      <PlayersTable color={highlightcolor}  />
+      <PlayersTable color={highlightcolor}/>
       <AddPlayer />
     </div>
   );

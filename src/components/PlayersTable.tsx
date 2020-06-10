@@ -1,8 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, {useRef, PropsWithChildren } from "react";
 import playersArray from "./Players.json";
 
-export interface ColorProps {
-  color: string;
+export interface Color {
+  color: string 
 }
 
 export interface Player {
@@ -17,28 +17,26 @@ export interface newPlayerProps {
   points: number;
 }
 
-export const PlayersTable:React.FC<ColorProps>  = (props, children: any) => {
-  const [newPlayerName, setNewPlayerName] = useState<string>("");
-  const [newPlayerId, setNewPlayerId] = useState<number>(11);
-  const [newPlayer, setNewPlayer] = useState<Player>({
-    id: newPlayerId,
-    username: newPlayerName,
-    points: 0,
-  });
-  const [newArray, setNewArray]=useState([]);
+export const PlayersTable:(props: PropsWithChildren<Color>, children: any) => any = (props, children: any) => {
 
-  const addPlayer: () => void = () => {
+  let id = 10;
+
+ let newArray: { id: number; username: string | undefined; points: number; }[] =[];
+
+  const addPlayer = () => {
     const points = Math.floor(Math.random() * 200) + 1;
-    setNewPlayer({
-      id: newPlayer.id,
-      username: newPlayer.username,
-      points: points,
-    });
-    setNewPlayerId((prevNewPlayerId) => prevNewPlayerId + 1);
-    const functionArray = [...newArray, newPlayer];
-    
+    id++;
+
+    const Player = {
+        id:id,
+        username: nameRef.current?.value,
+        points: points
     }
-  };
+    
+    newArray.push(Player);
+    console.log(newArray)
+    return newArray
+    };
 
   const sumOfPoints: number = playersArray.reduce(
     (previousScore, currentScore, index) => previousScore + currentScore.points,
@@ -60,8 +58,8 @@ export const PlayersTable:React.FC<ColorProps>  = (props, children: any) => {
         <input
           ref={nameRef}
           placeholder="Enter the name if the player"
-          onChange={(e) => setNewPlayerName(e.target.value)}
           type="text"
+          
         />
         <button onClick={addPlayer}>add a new Player and see the score</button>
       </>
@@ -79,15 +77,22 @@ export const PlayersTable:React.FC<ColorProps>  = (props, children: any) => {
                   : { color: "black", backgroundColor: "white" }
               }
             >
-              {/* <td>{player.username}</td> <td>{player.points}</td> 
-              mapping newArray method!*/}
+              <td>{player.username}</td> <td>{player.points}</td>
+              
             </tr>
           ))}
-
-          <tr>
-            <td>{newPlayer.username}</td>
-            <td>{newPlayer.points}</td>
-          </tr>
+          {newArray.map((player) => (
+            <tr
+              key={player.id}
+              style={
+                player.points > 100
+                  ? { color: "white", backgroundColor: props.color }
+                  : { color: "black", backgroundColor: "white" }
+              }
+            >
+              <td>{player.username}</td> <td>{player.points}</td>
+            </tr>
+          ))}
         </tbody>
         <tfoot>
           <tr>
@@ -101,3 +106,4 @@ export const PlayersTable:React.FC<ColorProps>  = (props, children: any) => {
     </div>
   );
 };
+
