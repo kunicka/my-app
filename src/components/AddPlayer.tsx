@@ -1,40 +1,36 @@
-import React, { useState } from "react";
-import playersArray from "./Players.json";
+import React, { useState, ChangeEvent } from "react";
+import {IplayerListAndColor} from "./PlayersArrayMapping"
 
-export const AddPlayer: React.FC = () => {
-  const [name, setName] = useState<string>("");
-  const [newPlayerId, setNewPlayerId] = useState<number>(11);
+export const AddPlayer: React.FC<IplayerListAndColor> = ({playersList, setPlayersList}) => {
+  
+  const [name, setName] = useState("");
 
-  const addPlayer: () => void = () => {
+  const addPlayer = () => {
+    const id = playersList[playersList.length - 1].id + 1;
     const points = Math.floor(Math.random() * 200) + 1;
-
-    const next = {
-      id: newPlayerId,
+    const Player = {
+      id: id,
       username: name,
       points: points,
     };
-
-    const newPlayer = JSON.stringify(next, null, 2);
-    console.log(newPlayer);
-
-    playersArray.push(next);
-    setNewPlayerId((prevNewPlayerId) => prevNewPlayerId + 1);
+    setPlayersList([...playersList, Player]);
+    setName(" ");
   };
 
+  const handleClick = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+
+  };
   return (
     <>
-      <input
-        placeholder="Enter the name if the player"
-        onChange={(e) => setName(e.target.value)}
-        type="text"
-      />
-      <button onClick={addPlayer}>add a new Player and see the score</button>
-      <table>
-        <tr>
-          <td></td>
-          <td></td>
-        </tr>
-      </table>
-    </>
+        <input
+          id="name-input"
+          placeholder="Enter the name if the player"
+          type="text"
+          onChange={handleClick}
+          value={name}
+        />
+        <button style={{display:"block"}} onClick={addPlayer}>add a new Player</button>
+      </>
   );
 };
